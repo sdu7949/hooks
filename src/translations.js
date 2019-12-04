@@ -1,7 +1,7 @@
 const translations = {
-    "es" :{
-        "Hello" : "Hola",
-        "Translate" : "Traducir"
+    es :{
+        "Hello!" : "Hola!",
+        Translate : "Traducir"
     }
 };
 

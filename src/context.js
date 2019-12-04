@@ -6,8 +6,10 @@ const Lang=({defaultLang, children, translations}) =>{
     const [lang, setLang] = useState(defaultLang);
 
     const hyperTranslate = text => {
-        if(lang ===defaultLang){
+        if(lang === defaultLang){
             return text;
+        }else{
+            return translations[lang][text];
         }
     };
 
