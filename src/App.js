@@ -1,12 +1,13 @@
 import React from "react";
+import translations from "./translations";
+import Lang from "./context";
 import Screen from "./Screen";
-import UserContextProvider from "./context";
 
 function App() {
   return (
-    <UserContextProvider>
+    <Lang defaultLang="en" translations={translations}>
       <Screen />
-    </UserContextProvider>
+    </Lang>
   );
 }
 

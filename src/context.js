@@ -1,29 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, createContext } from "react";
 
-const UserContext = React.createContext();
+const LangContext = createContext();
 
-const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    name: "Nico",
-    loggedIn: false
-  });
-  const logUserIn = () => setUser({ ...user, loggedIn: true });
-  //...user 앞에 점3개는 모든 오브젝트를 뒤진다라는 의미
-  return (
-    <UserContext.Provider value={{ user, fn: {logUserIn} }}>
-      {children}
-    </UserContext.Provider>
-  );
+const Lang=({defaultLang, children, translations}) =>{
+    const [lang, setLang] = useState(defaultLang);
+
+    const hyperTranslate = text => {
+        if(lang ===defaultLang){
+            return text;
+        }
+    };
+
+    return (<LangContext.Provider value={{setLang, t : hyperTranslate}}>{children}</LangContext.Provider>);
+};
+//Lang 은 영어로 값이 들어오면, 다른언어로 번역 되는 기능
+
+export const useSetLang= () =>{
+    const {setLang} = useContext(LangContext);
+    return setLang;
 };
 
-export const useUser = () => {
-    const { user } = useContext(UserContext);
-    return user;
-  };
-  
-  export const useFns = () => {
-    const { fn } = useContext(UserContext);
-    return fn;
-  };
+export const useT = () => {
+    const {t} = useContext(LangContext);
+    return t;
+}
 
-export default UserContextProvider;
+export default Lang;
